@@ -8,8 +8,8 @@ export const msalConfig: Configuration = {
     redirectUri: env.redirectUri,
   },
   cache: {
-    cacheLocation: "sessionStorage",
-    storeAuthStateInCookie: false,
+    cacheLocation: "localStorage",
+    storeAuthStateInCookie: true,
   },
 };
 

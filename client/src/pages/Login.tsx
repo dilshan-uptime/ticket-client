@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -11,10 +11,11 @@ import { toast } from "react-hot-toast";
 import { setAuthToken } from "@/lib/api";
 
 export default function Login() {
-  const { instance, accounts } = useMsal();
+  const { instance, accounts, inProgress } = useMsal();
   const dispatch = useAppDispatch();
   const [, setLocation] = useLocation();
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const { isAuthenticated, isLoading } = useAppSelector((state) => state.auth);
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -55,8 +56,19 @@ export default function Login() {
   }, [accounts, instance, dispatch, setLocation]);
 
   const handleLogin = async () => {
+    if (isSigningIn) {
+      return;
+    }
+
+    if (inProgress === "login" || inProgress === "ssoSilent") {
+      toast.error("Sign-in already in progress. Please wait...");
+      return;
+    }
+
     try {
+      setIsSigningIn(true);
       dispatch(setLoading(true));
+      
       const response = await instance.loginPopup(loginRequest);
 
       if (response && response.account) {
@@ -70,14 +82,22 @@ export default function Login() {
         dispatch(setUser(user));
         dispatch(setAccessToken(response.accessToken));
         setAuthToken(response.accessToken);
-        dispatch(setLoading(false));
         toast.success("Successfully logged in!");
         setLocation("/home");
       }
     } catch (error: any) {
       console.error("Login error:", error);
+      
+      if (error.errorCode === "interaction_in_progress") {
+        toast.error("Sign-in already in progress. Please wait and try again.");
+      } else if (error.errorCode === "user_cancelled") {
+        toast.error("Sign-in was cancelled.");
+      } else {
+        toast.error(error.message || "Failed to sign in. Please try again.");
+      }
+    } finally {
+      setIsSigningIn(false);
       dispatch(setLoading(false));
-      toast.error(error.message || "Failed to sign in. Please try again.");
     }
   };
 
@@ -107,15 +127,28 @@ export default function Login() {
             onClick={handleLogin} 
             className="w-full gap-2" 
             size="lg"
+            disabled={isSigningIn}
             data-testid="button-microsoft-login"
           >
-            <svg className="h-5 w-5" viewBox="0 0 23 23" fill="currentColor">
-              <path d="M0 0h11v11H0z" />
-              <path d="M12 0h11v11H12z" />
-              <path d="M0 12h11v11H0z" />
-              <path d="M12 12h11v11H12z" />
-            </svg>
-            Sign in with Microsoft
+            {isSigningIn ? (
+              <>
+                <svg className="h-5 w-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Signing in...
+              </>
+            ) : (
+              <>
+                <svg className="h-5 w-5" viewBox="0 0 23 23" fill="currentColor">
+                  <path d="M0 0h11v11H0z" />
+                  <path d="M12 0h11v11H12z" />
+                  <path d="M0 12h11v11H0z" />
+                  <path d="M12 12h11v11H12z" />
+                </svg>
+                Sign in with Microsoft
+              </>
+            )}
           </Button>
           
           <div className="relative">
