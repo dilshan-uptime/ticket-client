@@ -102,7 +102,7 @@ export default function Login() {
             </CardDescription>
           </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-3">
           <Button 
             onClick={handleLogin} 
             className="w-full gap-2" 
@@ -117,6 +117,31 @@ export default function Login() {
             </svg>
             Sign in with Microsoft
           </Button>
+          
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                Or
+              </span>
+            </div>
+          </div>
+
+          <Button
+            variant="outline"
+            className="w-full gap-2"
+            size="lg"
+            onClick={() => window.location.href = '/download-project'}
+            data-testid="button-download-project"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            Download Complete Project (449 KB)
+          </Button>
+          
           <p className="text-xs text-center text-muted-foreground mt-4">
             By signing in, you agree to our terms of service and privacy policy
           </p>
