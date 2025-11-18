@@ -13,7 +13,7 @@ import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import { logout } from "@/store/slices/authSlice";
 import { useMsal } from "@azure/msal-react";
 import { setAuthToken } from "@/lib/api";
-import logoUrl from "@assets/image_1763445721362.png";
+import logoUrl from "@assets/logo_1763446328043.png";
 
 export function Header() {
   const { user } = useAppSelector((state) => state.auth);
@@ -39,10 +39,11 @@ export function Header() {
         <div className="flex items-center gap-3">
           <img 
             src={logoUrl} 
-            alt="Logo" 
-            className="h-10 w-10" 
+            alt="Uptime Logo" 
+            className="h-8 w-auto" 
             data-testid="img-logo"
           />
+          <div className="h-8 w-px bg-border"></div>
           <div>
             <h1 className="text-lg font-semibold text-foreground" data-testid="text-app-title">
               Ticket Management

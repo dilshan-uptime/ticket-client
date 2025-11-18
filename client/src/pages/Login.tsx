@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setUser, setAccessToken, setLoading } from "@/store/slices/authSlice";
 import { loginRequest } from "@/config/msalConfig";
-import logoUrl from "@assets/image_1763445721362.png";
+import logoUrl from "@assets/logo_1763446328043.png";
 import { toast } from "react-hot-toast";
 import { setAuthToken } from "@/lib/api";
 
@@ -85,11 +85,11 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center space-y-4">
-          <div className="flex justify-center">
+          <div className="flex justify-center mb-2">
             <img 
               src={logoUrl} 
-              alt="Logo" 
-              className="h-16 w-16" 
+              alt="Uptime Logo" 
+              className="h-20 w-auto" 
               data-testid="img-logo"
             />
           </div>
