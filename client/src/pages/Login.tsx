@@ -39,6 +39,8 @@ export default function Login() {
             email: accounts[0].username,
             displayName: accounts[0].name || accounts[0].username,
             azureId: accounts[0].localAccountId,
+            twoFactorSecret: null,
+            twoFactorEnabled: "false",
           };
 
           dispatch(setUser(user));
@@ -79,6 +81,8 @@ export default function Login() {
           email: response.account.username,
           displayName: response.account.name || response.account.username,
           azureId: response.account.localAccountId,
+          twoFactorSecret: null,
+          twoFactorEnabled: "false",
         };
 
         dispatch(setUser(user));
