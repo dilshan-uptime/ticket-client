@@ -1,14 +1,10 @@
 import { Configuration, PopupRequest } from "@azure/msal-browser";
 import { env } from "./env";
 
-if (!env.clientId || !env.tenantId) {
-  throw new Error("Missing required Azure AD configuration. Please check your environment variables.");
-}
-
 export const msalConfig: Configuration = {
   auth: {
-    clientId: env.clientId,
-    authority: `https://login.microsoftonline.com/${env.tenantId}`,
+    clientId: env.clientId || "",
+    authority: `https://login.microsoftonline.com/${env.tenantId || "common"}`,
     redirectUri: env.redirectUri,
     postLogoutRedirectUri: window.location.origin,
   },
