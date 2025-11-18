@@ -4,3 +4,19 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Environment variables (keep secrets safe!)
+.env
+client/.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.log
+.cache
+.upm
+.local
+
+# IDE
+.vscode
+.idea
