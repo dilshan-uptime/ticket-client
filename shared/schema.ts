@@ -9,6 +9,8 @@ export const users = pgTable("users", {
   email: text("email").notNull().unique(),
   displayName: text("display_name").notNull(),
   azureId: text("azure_id").notNull().unique(),
+  twoFactorSecret: text("two_factor_secret"),
+  twoFactorEnabled: text("two_factor_enabled").notNull().default("false"),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({

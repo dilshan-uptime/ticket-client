@@ -4,11 +4,13 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setUser, setAccessToken, setLoading } from "@/store/slices/authSlice";
+import { setUser, setTempUser, setAccessToken, setLoading } from "@/store/slices/authSlice";
 import { loginRequest } from "@/config/msalConfig";
 import logoUrl from "@assets/logo_1763446328043.png";
 import { toast } from "react-hot-toast";
 import { setAuthToken } from "@/lib/api";
+import { apiRequest } from "@/lib/queryClient";
+import type { User } from "@shared/schema";
 
 export default function Login() {
   const { instance, accounts, inProgress } = useMsal();
