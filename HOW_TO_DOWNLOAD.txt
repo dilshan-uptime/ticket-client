@@ -1,0 +1,53 @@
+================================================================================
+  HOW TO DOWNLOAD YOUR PROJECT FILE
+================================================================================
+
+Your complete project has been packaged as: uptime-alert-dashboard.tar.gz
+
+FILE LOCATION: /home/runner/workspace/uptime-alert-dashboard.tar.gz
+FILE SIZE: 449 KB
+
+DOWNLOAD INSTRUCTIONS FOR REPLIT:
+================================================================================
+
+1. Look at the FILES PANEL on the left side of Replit
+2. Scroll to find: uptime-alert-dashboard.tar.gz
+3. RIGHT-CLICK on the file
+4. Select "Download"
+
+IF YOU STILL CAN'T FIND IT:
+================================================================================
+
+The file is in the ROOT DIRECTORY (same level as package.json)
+
+Try these steps:
+- Click the "Files" icon in the left sidebar
+- Make sure you're viewing the root folder (not inside client/ or server/)
+- Look for a file named: uptime-alert-dashboard.tar.gz
+- It should appear near the top of the file list (alphabetically)
+
+ALTERNATIVE - USE THE SHELL:
+================================================================================
+
+1. Open the "Shell" tab in Replit
+2. Type: ls -lh *.tar.gz
+3. You should see: uptime-alert-dashboard.tar.gz
+4. Then refresh your Files panel and it should appear
+
+WHAT'S INSIDE:
+================================================================================
+
+This archive contains your complete, working Alert Dashboard application:
+- All source code (React frontend + Express backend)
+- Configuration files
+- Uptime logo and assets
+- Setup instructions
+- Design guidelines
+- Everything needed to run the project
+
+After downloading, extract it with:
+  tar -xzf uptime-alert-dashboard.tar.gz
+
+Then follow the instructions in DOWNLOAD_INSTRUCTIONS.md
+
+================================================================================
